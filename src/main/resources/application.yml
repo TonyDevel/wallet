@@ -1,0 +1,35 @@
+server:
+  port: 9999
+
+springdoc:
+  swagger-ui:
+    path: /swagger-ui/
+  packages-to-scan: com.wallet.controller
+
+spring:
+  jpa:
+    hibernate:
+      namingStrategy: org.hibernate.cfg.DefaultNamingStrategy
+      naming:
+        implicit-strategy: org.hibernate.boot.model.naming.ImplicitNamingStrategyLegacyJpaImpl
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQL95Dialect
+        default_schema: public
+    open-in-view: false
+  flyway:
+    schemas: public
+    baselineOnMigrate: true
+    baselineVersion: 1.0.0
+    locations:
+      - 'classpath:db/migration'
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/wallet
+    # for simplicity’s sake (of course it's better to store in ENV or vault)
+    username: wallet_user
+    password: password
+    hikari.auto-commit: false
+    maximum-pool-size: 20
+    minimum-idle: 10

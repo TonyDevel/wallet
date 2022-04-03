@@ -1,0 +1,47 @@
+plugins {
+	id 'org.springframework.boot' version '2.6.5'
+	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+	id 'java'
+}
+
+group = 'com.wallet'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '11'
+targetCompatibility = '11'
+
+configurations {
+	compileOnly {
+		extendsFrom annotationProcessor
+	}
+}
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+
+	implementation "org.springdoc:springdoc-openapi-ui:${springDocVersion}"
+	implementation "org.springdoc:springdoc-openapi-webmvc-core:${springDocVersion}"
+
+	implementation "javax.validation:validation-api:${javaxValidationApiVersion}"
+	implementation "org.hibernate.validator:hibernate-validator:${hibernateValidatorVersion}"
+
+	implementation 'org.flywaydb:flyway-core'
+	compileOnly 'org.projectlombok:lombok'
+	runtimeOnly 'org.postgresql:postgresql'
+	annotationProcessor 'org.projectlombok:lombok'
+
+	testImplementation "junit:junit"
+	testImplementation "org.junit.jupiter:junit-jupiter-api"
+	testImplementation "org.mockito:mockito-core:${mockitoVersion}"
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+}
+
+bootJar {
+	enabled = true
+	libsDirName = './../docker-dir'
+	archiveName 'app.jar'
+}

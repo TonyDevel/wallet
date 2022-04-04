@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
 
-./gradlew clean install
+./gradlew clean build
 
 docker-compose up -d
